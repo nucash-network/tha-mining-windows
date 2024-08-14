@@ -16,10 +16,13 @@ Ensure Python and Git are installed on your system. If not, download and install
 
 Open Command Prompt and use Git to clone the THA Core repository from GitHub:
 
-```sh
+
+`sh`
+```
 git clone https://github.com/nucash-mining/tha-mining.git
 cd tha-mining
-Step 3: Download and Extract THA Core
+```
+## Step 3: Download and Extract THA Core
 Download the latest version of the THA mining software:
 
 Download THA Mining Software v26.1.1
@@ -28,37 +31,45 @@ Extract the downloaded ZIP file:
 
 Right-click on tha-v26.1.1-win64.zip and select Extract All....
 Choose a destination folder and click Extract.
-Step 4: Set Up SEND and RECEIVE Wallets
+
+## Step 4: Set Up SEND and RECEIVE Wallets
 Initialize the THA Core Daemon:
 
 Open Command Prompt, navigate to the extracted folder, and start the THA Core daemon:
 
-sh
-Copy code
+`sh`
+```
 cd path\to\extracted\files
 thad.exe -daemon
+```
+
 Create SEND and RECEIVE Wallets
 If THA Core does not automatically create default wallets, create them manually:
 
-sh
-Copy code
+`sh`
+```
 tha-cli.exe createwallet "SEND"
 tha-cli.exe createwallet "RECEIVE"
+```
+
 Generate Wallet Addresses
 Generate new addresses for both wallets to use for transactions:
 
-sh
-Copy code
+`sh`
+```
 set send_address=$(tha-cli.exe -rpcwallet=SEND getnewaddress)
 set receive_address=$(tha-cli.exe -rpcwallet=RECEIVE getnewaddress)
 echo SEND Wallet Address: %send_address%
 echo RECEIVE Wallet Address: %receive_address%
+```
 Step 5: Deploy the Python Scripts
+
 Transaction Listener Script
 Create a file named TransactionListener.py and add the following content:
 
-python
-Copy code
+`python`
+
+```
 import requests
 import json
 import time
@@ -101,11 +112,13 @@ if __name__ == '__main__':
             time.sleep(60)  # Wait for a minute before checking again
     except Exception as e:
         print(f"An error occurred: {e}")
+```
+
 Send THA Transaction Script
 Create a file named SendTHATransaction.py and add the following content:
 
-python
-Copy code
+`python`
+```
 import requests
 import json
 
@@ -142,11 +155,13 @@ if __name__ == '__main__':
 
     except Exception as e:
         print(f"An error occurred: {e}")
+```
+
 Block Reward Confirmation Trigger Script
 Create a file named BlockRewardConfirmationTrigger.py and add the following content:
 
-python
-Copy code
+`python`
+```
 import requests
 import json
 import time
@@ -196,11 +211,13 @@ if __name__ == '__main__':
             time.sleep(60)
     except Exception as e:
         print(f"An error occurred: {e}")
+```
+
 Mining Reward Redirector Script
 Create a file named MiningRewardRedirector.py and add the following content:
 
-python
-Copy code
+`python`
+```
 import requests
 import json
 import time
@@ -249,11 +266,13 @@ if __name__ == '__main__':
             time.sleep(60)
     except Exception as e:
         print(f"An error occurred: {e}")
-Step 6: Automate Execution with a Batch Script
+```
+
+## Step 6: Automate Execution with a Batch Script
 Create a file named setup_and_monitor.bat and add the following content:
 
-batch
-Copy code
+`batch`
+```
 @echo off
 
 REM Install Python and Git if not already installed
@@ -290,13 +309,14 @@ set RPC_PASSWORD=%rpc_password%
 REM Run the transaction listener script
 python TransactionListener.py
 pause
+```
 Make the script executable by saving it with a .bat extension. Then, run your setup script by double-clicking the setup_and_monitor.bat file.
 
-Step 7: Document Everything
+## Step 7: Document Everything
 Prepare a README.md:
 
-markdown
-Copy code
+`markdown`
+```
 # THA Mining and Transaction Automation Scripts
 
 This repository contains a collection of scripts designed to automate various tasks related to THA cryptocurrency operations, such as monitoring wallets for new block rewards and automating transactions.
@@ -338,14 +358,17 @@ This repository contains a collection of scripts designed to automate various ta
   - **Usage**: 
     ```sh
     python TransactionListener.py
-    ```
+```
 
 ## Setup
 
 1. Ensure Python 3.x is installed on your system.
 2. Install required Python packages:
-   ```sh
-   pip install requests
+
+`sh`
+```
+pip install requests
+```
 Configure your THA node settings in each script as needed, especially the RPC user, password, and wallet names.
 Contributing
 Feel free to fork this repository and submit pull requests to contribute to the development of these automation scripts. For major changes, please open an issue first to discuss what you would like to change.
@@ -353,7 +376,7 @@ Feel free to fork this repository and submit pull requests to contribute to the 
 License
 MIT
 
-vbnet
-Copy code
+`vbnet`
+
 
 By following the above guide, users can install dependencies, set up their THA Core environment, and automate transactions with the provided scripts. This `README.md` will be accessible on your GitHub repository, and users can follow it step-by-step to replicate your setup. The `setup_and_monitor.bat` script will automate the entire process, reducing the manual effort required.
